@@ -1,4 +1,4 @@
-name: new grant action
+name: new bounty action
 
 on:
   issues:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  grant:
+  newbounty:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,14 +21,14 @@ jobs:
           git config --local user.name ${{ github.actor }}
           git config --local user.email "bot@rebase.community"
           git add README.md
-          git commit -m "submit new grant (Automated)"
+          git commit -m "submit new bounty (Automated)"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           force: true
       - name: reply
-        run: gh issue comment $ISSUE --body "Welcome to submit the grant information"
+        run: gh issue comment $ISSUE --body "Welcome to submit the bounty information"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.html_url }}
